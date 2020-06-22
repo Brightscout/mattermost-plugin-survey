@@ -1,0 +1,71 @@
+name: Release
+
+# Defines the trigger for this action (e.g. [pull_request, push])
+# For more information see: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows#about-workflow-events)
+on:
+  create:
+    tags:
+      - 'v*'
+
+jobs:
+  build_and_release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    name: Build and release
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Set up Go 1.14.2
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.2
+        id: go
+      - name: Use Node.js 12.18.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.18.0
+
+      - uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Build and bundle the plugin.
+        run: make dist
+        env:
+          TERM: dumb
+
+      - name: Prepare release metadata
+        id: prepare_release_metadata
+        run: |
+          echo ::set-output name=BUNDLE_NAME::mattermost-plugin-$(grep '"'"id"'"\s*:\s*"' plugin.json | head -1 | cut -d'"' -f4)-v$(grep '"'"version"'"\s*:\s*"' plugin.json | head -1 | cut -d'"' -f4).tar.gz
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/${{ steps.prepare_release_metadata.outputs.BUNDLE_NAME }}
+          asset_name: ${{ steps.prepare_release_metadata.outputs.BUNDLE_NAME }}
+          asset_content_type: application/gzip

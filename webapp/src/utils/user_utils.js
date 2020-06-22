@@ -1,4 +1,3 @@
-
 import {getFullName} from 'mattermost-redux/utils/user_utils';
 
 export function displayUsernameForUser(user, config) {

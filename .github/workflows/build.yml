@@ -1,0 +1,63 @@
+name: Build
+
+# Defines the trigger for this action (e.g. [pull_request, push])
+# For more information see: https://help.github.com/en/actions/automating-your-workflow-with-github-actions/events-that-trigger-workflows#about-workflow-events)
+on: push
+
+jobs:
+  build:
+    name: Build and check-style
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Set up Go 1.14.2
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.14.2
+        id: go
+      - name: Use Node.js 12.18.0
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.18.0
+
+      # Checks out the current repository.
+      - uses: actions/checkout@v2
+
+      # This action allows caching dependencies to improve workflow execution time.
+      - uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Only use the ssh-agent action below if your repository has private git dependencies
+      # Note: Only one ssh_private_key will work at a time if using deploy keys
+      #      - name: Setup SSH Keys and known_hosts
+      #        uses: webfactory/ssh-agent@v0.3.0
+      #        with:
+      #          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      # The `PERSONAL_ACCESS_TOKEN` secret is required for installing dependencies from the github packages registry
+      - name: Authenticate with GitHub package registry
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.PERSONAL_ACCESS_TOKEN }}" > ~/.npmrc
+
+      - name: Check the code style, run tests, build and bundle the plugin.
+        run: make all
+        env:
+          TERM: dumb
+
+      - name: Prepare artifact metadata
+        id: prepare_artifact_metadata
+        run: |
+          echo ::set-output name=BUNDLE_NAME::mattermost-plugin-$(grep '"'"id"'"\s*:\s*"' plugin.json | head -1 | cut -d'"' -f4)-v$(grep '"'"version"'"\s*:\s*"' plugin.json | head -1 | cut -d'"' -f4).tar.gz
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ steps.prepare_artifact_metadata.outputs.BUNDLE_NAME }}
+          path: dist/${{ steps.prepare_artifact_metadata.outputs.BUNDLE_NAME }}

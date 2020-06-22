@@ -46,7 +46,9 @@ export default class QuestionTypeLikertScale extends React.PureComponent {
     };
 
     render() {
-        const {id: questionID, index, responses, text, theme} = this.props;
+        const {
+            id: questionID, index, responses, text, theme,
+        } = this.props;
         const {hoveredValue, selectedValue} = this.state;
         const style = getStyle(theme);
 

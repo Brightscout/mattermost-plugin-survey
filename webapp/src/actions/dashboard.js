@@ -7,13 +7,19 @@ export function getDashboardPath() {
         try {
             data = await Client.getDashboardPath();
         } catch (error) {
-            return {data: null, error};
+            return {
+                data: null,
+                error,
+            };
         }
 
         dispatch({
             type: Constants.ACTION_TYPES.RECEIVED_DASHBOARD_PATH,
             data,
         });
-        return {data, error: null};
+        return {
+            data,
+            error: null,
+        };
     };
 }

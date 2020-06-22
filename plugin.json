@@ -1,57 +1,63 @@
 {
-  "id": "survey",
-  "version": "1.0.0",
-  "name": "Survey",
-  "description": "",
-  "webapp": {
-    "bundle_path": "webapp/main.js"
-  },
-  "server": {
-    "executable": "server/plugin.exe"
-  },
-  "settings_schema": {
-	  "settings": [
-      {
-        "key": "BotUsername",
-        "display_name": "Bot Username:",
-        "type": "username",
-        "help_text": "Select the user that initiates the surveys posts."
-      },
-      {
-        "key": "Survey",
-        "display_name": "Survey:",
-        "type": "longtext",
-        "help_text": "Enter the survey in the required format.",
-        "default": "{\n\t\"title\": \"Riff Meeting Survey\",\n\t\"description\": \"Please tell us about your Riff meeting experience. We will ask you to take this short survey after each meeting, to see how your experience changes over time.\",\n\t\"questions\": [\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable conversing using this medium.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable participating in group discussions.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable interacting with other group members.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I was able to speak my mind in my group discussion.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"open\",\n\t\t\t\"text\": \"Please add any other comments about the Riff Edu meeting experience.\"\n\t\t}\n\t]\n}"
-      },
-      {
-        "key": "DashboardPath",
-        "display_name": "Dashboard Path:",
-        "type": "text",
-        "default": "/pages/dashboard",
-        "help_text": "Relative Path to the Riff Stats page."
-      },
-      {
-        "key": "ReminderText",
-        "display_name": "Reminder Text:",
-        "type": "text",
-        "default": "A gentle reminder to fill the survey.",
-        "help_text": "Enter the message to be sent to users as a reminder for filling pending surveys."
-      },
-      {
-        "key": "MaxReminderCount",
-        "display_name": "Max Reminder Count:",
-        "type": "text",
-        "default": "3",
-        "help_text": "The maximum number of times a survey reminder can be sent to a user."
-      },
-      {
-        "key": "ReminderInterval",
-        "display_name": "Reminder Interval:",
-        "type": "text",
-        "default": "15",
-        "help_text": "Time in minutes after which a new reminder is sent to a user."
-      }
-    ]
-  }
+    "id": "survey",
+    "version": "1.0.0",
+    "name": "Riff Survey",
+    "description": "",
+    "min_server_version": "5.12.0",
+    "server": {
+        "executables": {
+            "linux-amd64": "server/dist/plugin-linux-amd64",
+            "darwin-amd64": "server/dist/plugin-darwin-amd64",
+            "windows-amd64": "server/dist/plugin-windows-amd64.exe"
+        },
+        "executable": ""
+    },
+    "webapp": {
+        "bundle_path": "webapp/dist/main.js"
+    },
+    "settings_schema": {
+        "settings": [
+            {
+                "key": "BotUsername",
+                "display_name": "Bot Username:",
+                "type": "username",
+                "help_text": "Select the user that initiates the surveys posts."
+            },
+            {
+                "key": "Survey",
+                "display_name": "Survey:",
+                "type": "longtext",
+                "help_text": "Enter the survey in the required format.",
+                "default": "{\n\t\"title\": \"Riff Meeting Survey\",\n\t\"description\": \"Please tell us about your Riff meeting experience. We will ask you to take this short survey after each meeting, to see how your experience changes over time.\",\n\t\"questions\": [\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable conversing using this medium.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable participating in group discussions.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable interacting with other group members.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I was able to speak my mind in my group discussion.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"open\",\n\t\t\t\"text\": \"Please add any other comments about the Riff Edu meeting experience.\"\n\t\t}\n\t]\n}"
+            },
+            {
+                "key": "DashboardPath",
+                "display_name": "Dashboard Path:",
+                "type": "text",
+                "default": "/pages/dashboard",
+                "help_text": "Relative Path to the Riff Stats page."
+            },
+            {
+                "key": "ReminderText",
+                "display_name": "Reminder Text:",
+                "type": "text",
+                "default": "A gentle reminder to fill the survey.",
+                "help_text": "Enter the message to be sent to users as a reminder for filling pending surveys."
+            },
+            {
+                "key": "MaxReminderCount",
+                "display_name": "Max Reminder Count:",
+                "type": "text",
+                "default": "3",
+                "help_text": "The maximum number of times a survey reminder can be sent to a user."
+            },
+            {
+                "key": "ReminderInterval",
+                "display_name": "Reminder Interval:",
+                "type": "text",
+                "default": "15",
+                "help_text": "Time in minutes after which a new reminder is sent to a user."
+            }
+        ]
+    }
 }

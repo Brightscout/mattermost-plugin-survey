@@ -1,4 +1,6 @@
-import {closeSurveyModal, getSurvey, openSurveyModal, submitSurveyResponses} from './survey';
+import {
+    closeSurveyModal, getSurvey, openSurveyModal, submitSurveyResponses,
+} from './survey';
 import {setCurrentPostID, setCurrentPostProps} from './post';
 import {getDashboardPath} from './dashboard';
 

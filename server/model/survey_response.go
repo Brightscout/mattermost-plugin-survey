@@ -3,7 +3,7 @@ package model
 import (
 	"encoding/json"
 
-	serverModel "github.com/mattermost/mattermost-server/model"
+	serverModel "github.com/mattermost/mattermost-server/v5/model"
 )
 
 // SurveyResponse records the users responses to the survey questions

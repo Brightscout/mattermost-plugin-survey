@@ -1,8 +1,0 @@
-package: github.com/rifflearning/mattermost-plugin-survey/server
-import:
-- package: github.com/mattermost/mattermost-server
-  version: 5.5.1
-  subpackages:
-  - plugin
-- package: github.com/pkg/errors
-  version: v0.8.1

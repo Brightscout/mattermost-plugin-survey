@@ -3,8 +3,8 @@ package reminders
 import (
 	"time"
 
-	serverModel "github.com/mattermost/mattermost-server/model"
-	serverUtils "github.com/mattermost/mattermost-server/utils"
+	serverModel "github.com/mattermost/mattermost-server/v5/model"
+	serverUtils "github.com/mattermost/mattermost-server/v5/utils"
 
 	"github.com/rifflearning/mattermost-plugin-survey/server/config"
 	"github.com/rifflearning/mattermost-plugin-survey/server/model"

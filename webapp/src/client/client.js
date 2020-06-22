@@ -1,4 +1,6 @@
 import request from 'superagent';
+import Cookies from 'js-cookie';
+
 import {buildQueryString} from 'mattermost-redux/utils/helpers';
 
 import Constants from '../constants';
@@ -6,7 +8,6 @@ import Constants from '../constants';
 /**
  *  Add web utilities for interacting with servers here
  */
-
 export default class Client {
     constructor() {
         const url = new URL(window.location.href);
@@ -53,67 +54,54 @@ export default class Client {
     doGet = async (url, headers = {}) => {
         headers['X-Requested-With'] = 'XMLHttpRequest';
 
-        try {
-            const response = await request.
-                get(url).
-                set(headers).
-                type('application/json').
-                accept('application/json');
+        const response = await request
+            .get(url)
+            .set(headers)
+            .type('application/json')
+            .accept('application/json');
 
-            return response.body;
-        } catch (err) {
-            throw err;
-        }
+        return response.body;
     };
 
     doPost = async (url, body, headers = {}) => {
         headers['X-Requested-With'] = 'XMLHttpRequest';
+        headers['X-CSRF-Token'] = Cookies.get(Constants.MATTERMOST_CSRF_COOKIE);
 
-        try {
-            const response = await request.
-                post(url).
-                send(body).
-                set(headers).
-                type('application/json').
-                accept('application/json');
+        const response = await request
+            .post(url)
+            .send(body)
+            .set(headers)
+            .type('application/json')
+            .accept('application/json');
 
-            return response.body;
-        } catch (err) {
-            throw err;
-        }
-    };
-
-    doDelete = async (url, body, headers = {}) => {
-        headers['X-Requested-With'] = 'XMLHttpRequest';
-
-        try {
-            const response = await request.
-                delete(url).
-                send(body).
-                set(headers).
-                type('application/json').
-                accept('application/json');
-
-            return response.body;
-        } catch (err) {
-            throw err;
-        }
+        return response.body;
     };
 
     doPut = async (url, body, headers = {}) => {
         headers['X-Requested-With'] = 'XMLHttpRequest';
+        headers['X-CSRF-Token'] = Cookies.get(Constants.MATTERMOST_CSRF_COOKIE);
 
-        try {
-            const response = await request.
-                put(url).
-                send(body).
-                set(headers).
-                type('application/json').
-                accept('application/json');
+        const response = await request
+            .put(url)
+            .send(body)
+            .set(headers)
+            .type('application/json')
+            .accept('application/json');
 
-            return response.body;
-        } catch (err) {
-            throw err;
-        }
+        return response.body;
     }
+
+    doDelete = async (url, body, headers = {}) => {
+        headers['X-Requested-With'] = 'XMLHttpRequest';
+        headers['X-CSRF-Token'] = Cookies.get(Constants.MATTERMOST_CSRF_COOKIE);
+
+        const response = await request
+            .delete(url)
+            .send(body)
+            .set(headers)
+            .type('application/json')
+            .accept('application/json');
+
+        return response.body;
+    };
 }

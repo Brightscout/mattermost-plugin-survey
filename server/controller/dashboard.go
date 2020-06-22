@@ -3,7 +3,7 @@ package controller
 import (
 	"net/http"
 
-	serverModel "github.com/mattermost/mattermost-server/model"
+	serverModel "github.com/mattermost/mattermost-server/v5/model"
 	"github.com/pkg/errors"
 
 	"github.com/rifflearning/mattermost-plugin-survey/server/config"

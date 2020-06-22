@@ -1,10 +1,11 @@
 # Binaries for programs and plugins
 *.exe
+*.exe~
 *.dll
 *.so
 *.dylib
 
-# Test binary, build with `go test -c`
+# Test binary, built with `go test -c`
 *.test
 
 # Output of the go coverage tool, specifically when used with LiteIDE
@@ -65,11 +66,23 @@ jspm_packages/
 # next.js build output
 .next
 
+# IDE generated files
+.idea
+
 # Plugin generated files
 dist
 plugin.exe
 .npminstall
 *.tar.gz
-server/vendor/
+vendor/
 .history/
 coverage.txt
+
+# webapp test cases
+junit.xml
+
+# Mac
+.DS_Store
+
+# VSCode
+.vscode

@@ -19,10 +19,16 @@ export function getSurvey(surveyID, surveyVersion) {
         try {
             data = await Client.getSurvey(surveyID, surveyVersion);
         } catch (error) {
-            return {data: null, error};
+            return {
+                data: null,
+                error,
+            };
         }
 
-        return {data, error: null};
+        return {
+            data,
+            error: null,
+        };
     };
 }
 
@@ -32,9 +38,15 @@ export function submitSurveyResponses(surveyPostID, meetingID, surveyID, surveyV
         try {
             data = await Client.submitSurveyResponses(surveyPostID, meetingID, surveyID, surveyVersion, responses);
         } catch (error) {
-            return {data: null, error};
+            return {
+                data: null,
+                error,
+            };
         }
 
-        return {data, error: null};
+        return {
+            data,
+            error: null,
+        };
     };
 }

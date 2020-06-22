@@ -1,33 +1,41 @@
 {
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true
+  },
   "extends": [
-    "./node_modules/eslint-config-mattermost/.eslintrc.json",
-    "./node_modules/eslint-config-mattermost/.eslintrc-react.json",
+    "./node_modules/eslint-plugin-mattermost/.eslintrc.json",
+    "./node_modules/eslint-plugin-mattermost/.eslintrc-react.json",
     "plugin:jsx-a11y/recommended"
   ],
   "globals": {
-    "window": true,
-    "document": true
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly",
+    "document": true,
+    "window": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
   "plugins": [
     "header",
     "import",
-    "jsx-a11y",
     "react"
   ],
-  "env": {
-    "browser": true,
-    "node": true,
-    "jquery": true,
-    "es6": true
-  },
   "settings": {
     "import/resolver": "webpack",
     "react": {
       "pragma": "React",
-      "version": "16.4.1"
+      "version": "detect"
     }
   },
   "rules": {
+    "dot-location": [2, "property"],
     "header/header": 0,
     "import/no-unresolved": 2,
     "import/order": [
@@ -35,7 +43,6 @@
       {
         "newlines-between": "always-and-inside-groups",
         "groups": [
-
           "builtin",
           "external",
           [
@@ -47,6 +54,8 @@
         ]
       }
     ],
+    "indent": [2, 4],
+    "linebreak-style": [2, "unix"],
     "no-magic-numbers": [
       1,
       {
@@ -56,12 +65,23 @@
       }
     ],
     "no-unused-vars": [2, {"vars": "all", "args": "none"}],
-    "react/jsx-filename-extension": [
-      1,
+    "object-property-newline": [
+      2,
       {
-        "extensions": [".js", ".jsx"]
+        "allowAllPropertiesOnSameLine": false
       }
     ],
+    "object-curly-newline": [
+      2,
+      {
+        "ObjectExpression": { "minProperties": 4, "multiline": true, "consistent": true },
+        "ObjectPattern": { "minProperties": 4, "multiline": true, "consistent": true },
+        "ImportDeclaration": { "minProperties": 4, "multiline": true, "consistent": true },
+        "ExportDeclaration": { "minProperties": 4, "multiline": true, "consistent": true }
+      }
+    ],
+    "quotes": [2, "single"],
+    "semi": [2, "always"],
     "react/prop-types": 2
   }
 }

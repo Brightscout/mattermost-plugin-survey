@@ -16,11 +16,26 @@ const ERROR_MESSAGES = {
 };
 
 const FIVE_POINT_LIKERT_SCALE_RESPONSES = [
-    {value: '1', text: 'Strongly Agree'},
-    {value: '2', text: 'Agree'},
-    {value: '3', text: 'Neutral'},
-    {value: '4', text: 'Disagree'},
-    {value: '5', text: 'Strongly Disagree'},
+    {
+        value: '1',
+        text: 'Strongly Agree',
+    },
+    {
+        value: '2',
+        text: 'Agree',
+    },
+    {
+        value: '3',
+        text: 'Neutral',
+    },
+    {
+        value: '4',
+        text: 'Disagree',
+    },
+    {
+        value: '5',
+        text: 'Strongly Disagree',
+    },
 ];
 
 //
@@ -30,6 +45,7 @@ export default {
     ACTION_TYPES,
     ERROR_MESSAGES,
     FIVE_POINT_LIKERT_SCALE_RESPONSES,
+    MATTERMOST_CSRF_COOKIE: 'MMCSRF',
     OPEN_QUESTION_INITIAL_ROWS,
     OPEN_QUESTION_MAX_LENGTH,
     PLUGIN_NAME,

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Alert, Button, ButtonGroup, Clearfix, Modal, OverlayTrigger, Tooltip} from 'react-bootstrap';
+import {
+    Alert, Button, ButtonGroup, Clearfix, Modal, OverlayTrigger, Tooltip,
+} from 'react-bootstrap';
 
 import QuestionTypeOpen from '../question_type_open';
 import QuestionTypeLikertScale from '../question_type_likert_scale';
