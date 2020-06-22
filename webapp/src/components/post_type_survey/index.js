@@ -19,6 +19,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
+    openRiffDashboard: Actions.openRiffDashboard,
     openSurveyModal: Actions.openSurveyModal,
     setCurrentPostID: Actions.setCurrentPostID,
     setCurrentPostProps: Actions.setCurrentPostProps,

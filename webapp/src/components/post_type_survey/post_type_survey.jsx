@@ -15,6 +15,7 @@ export default class PostTypeSurvey extends React.PureComponent {
         setCurrentPostID: PropTypes.func.isRequired,
         setCurrentPostProps: PropTypes.func.isRequired,
         openSurveyModal: PropTypes.func.isRequired,
+        openRiffDashboard: PropTypes.func.isRequired,
     };
 
     constructor(props) {
@@ -30,7 +31,8 @@ export default class PostTypeSurvey extends React.PureComponent {
     };
 
     goToDashboard = () => {
-        window.location.href = this.props.dashboardURL;
+        // window.location.href = this.props.dashboardURL;
+        this.props.openRiffDashboard(this.props.post.props.meeting_id);
     };
 
     renderSubmitted = () => {
