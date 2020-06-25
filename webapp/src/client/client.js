@@ -16,10 +16,11 @@ export default class Client {
         this.apiUrl = `${this.baseUrl}/api/v4`;
     }
 
-    getSurvey = async (surveyID, surveyVersion) => {
+    getSurvey = async (surveyID, surveyVersion, meetingID) => {
         const queryParams = {
             survey_id: surveyID,
             survey_version: surveyVersion,
+            meeting_id: meetingID,
         };
         const url = `${this.pluginUrl}/survey${buildQueryString(queryParams)}`;
         return this.doGet(url);
