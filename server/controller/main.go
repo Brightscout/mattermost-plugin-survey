@@ -19,7 +19,6 @@ type Endpoint struct {
 var Endpoints = map[string]*Endpoint{
 	getEndpointKey(sendSurvey):           sendSurvey,
 	getEndpointKey(getSurvey):            getSurvey,
-	getEndpointKey(getDashboardPath):     getDashboardPath,
 	getEndpointKey(submitSurveyResponse): submitSurveyResponse,
 }
 

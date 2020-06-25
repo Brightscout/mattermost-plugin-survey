@@ -42,7 +42,6 @@ var (
 type Configuration struct {
 	BotUsername      string `json:"BotUsername"`
 	Survey           string `json:"Survey"`
-	DashboardPath    string `json:"DashboardPath"`
 	ReminderText     string `json:"ReminderText"`
 	MaxReminderCount string `json:"MaxReminderCount"`
 	ReminderInterval string `json:"ReminderInterval"`
@@ -100,10 +99,6 @@ func (c *Configuration) ProcessConfiguration() error {
 func (c *Configuration) IsValid() error {
 	if c.BotUsername == "" {
 		return errors.New("Bot username cannot be empty")
-	}
-
-	if c.DashboardPath == "" {
-		return errors.New("Dashboard path cannot be empty")
 	}
 
 	if c.ReminderText == "" {

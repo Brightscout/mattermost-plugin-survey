@@ -31,13 +31,6 @@
                 "default": "{\n\t\"title\": \"Riff Meeting Survey\",\n\t\"description\": \"Please tell us about your Riff meeting experience. We will ask you to take this short survey after each meeting, to see how your experience changes over time.\",\n\t\"questions\": [\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable conversing using this medium.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable participating in group discussions.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I felt comfortable interacting with other group members.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"five-point-likert-scale\",\n\t\t\t\"text\": \"I was able to speak my mind in my group discussion.\"\n\t\t},\n\t\t{\n\t\t\t\"type\": \"open\",\n\t\t\t\"text\": \"Please add any other comments about the Riff Edu meeting experience.\"\n\t\t}\n\t]\n}"
             },
             {
-                "key": "DashboardPath",
-                "display_name": "Dashboard Path:",
-                "type": "text",
-                "default": "/pages/dashboard",
-                "help_text": "Relative Path to the Riff Stats page."
-            },
-            {
                 "key": "ReminderText",
                 "display_name": "Reminder Text:",
                 "type": "text",

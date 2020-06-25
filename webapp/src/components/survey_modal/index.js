@@ -7,9 +7,8 @@ import Selectors from '../../selectors';
 import SurveyModal from './survey_modal';
 
 const mapStateToProps = (state) => ({
-    visible: Selectors.isSurveyModalVisible(state),
-    surveyPostID: Selectors.currentPostID(state),
-    surveyPostProps: Selectors.currentPostProps(state),
+    visible: Selectors.survey(state).visible,
+    surveyOptions: Selectors.survey(state),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

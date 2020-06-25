@@ -1,38 +1,25 @@
 import Constants from '../constants';
 
-export const surveyModalVisible = (state = false, action) => {
+const INITIAL_STATE = {
+    visible: false,
+    postID: '',
+    meetingID: '',
+    surveyID: '',
+    surveyVersion: '',
+};
+
+export const survey = (state = INITIAL_STATE, action) => {
     switch (action.type) {
     case Constants.ACTION_TYPES.OPEN_SURVEY_MODAL:
-        return true;
+        return {
+            visible: true,
+            postID: action.postID,
+            meetingID: action.meetingID,
+            surveyID: action.surveyID,
+            surveyVersion: action.surveyVersion,
+        };
     case Constants.ACTION_TYPES.CLOSE_SURVEY_MODAL:
-        return false;
-    default:
-        return state;
-    }
-};
-
-export const currentPostID = (state = '', action) => {
-    switch (action.type) {
-    case Constants.ACTION_TYPES.SET_CURRENT_POST_ID:
-        return action.data;
-    default:
-        return state;
-    }
-};
-
-export const currentPostProps = (state = {}, action) => {
-    switch (action.type) {
-    case Constants.ACTION_TYPES.SET_CURRENT_POST_PROPS:
-        return action.data;
-    default:
-        return state;
-    }
-};
-
-export const dashboardPath = (state = '', action) => {
-    switch (action.type) {
-    case Constants.ACTION_TYPES.RECEIVED_DASHBOARD_PATH:
-        return action.data.path;
+        return INITIAL_STATE;
     default:
         return state;
     }

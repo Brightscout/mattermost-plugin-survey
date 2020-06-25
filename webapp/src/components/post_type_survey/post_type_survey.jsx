@@ -9,29 +9,31 @@ import './styles.css';
 
 export default class PostTypeSurvey extends React.PureComponent {
     static propTypes = {
-        dashboardURL: PropTypes.string.isRequired,
         post: PropTypes.object.isRequired,
         currentUser: PropTypes.object.isRequired,
-        setCurrentPostID: PropTypes.func.isRequired,
-        setCurrentPostProps: PropTypes.func.isRequired,
         openSurveyModal: PropTypes.func.isRequired,
         openRiffDashboard: PropTypes.func.isRequired,
     };
 
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
 
     openModal = () => {
-        this.props.setCurrentPostID(this.props.post.id);
-        this.props.setCurrentPostProps(this.props.post.props);
-        this.props.openSurveyModal();
+        const postID = this.props.post.id;
+        const postProps = this.props.post.props;
+        const meetingID = postProps.meeting_id;
+
+        this.props.openSurveyModal(
+            postID,
+            meetingID,
+            postProps.survey_id,
+            postProps.survey_version
+        );
     };
 
     goToDashboard = () => {
-        // window.location.href = this.props.dashboardURL;
         this.props.openRiffDashboard(this.props.post.props.meeting_id);
     };
 
@@ -39,7 +41,9 @@ export default class PostTypeSurvey extends React.PureComponent {
         const message = `Thanks for your feedback @${this.props.currentUser.username}! Have you checked out your Riff Stats in the Dashboard?`;
         return (
             <div>
-                {messageHtmlToComponent(formatText(message, {atMentions: true}))}
+                {messageHtmlToComponent(
+                    formatText(message, {atMentions: true})
+                )}
                 <Button
                     bsStyle='primary'
                     className='survey-action-button'
@@ -56,7 +60,9 @@ export default class PostTypeSurvey extends React.PureComponent {
 
         return (
             <div>
-                {messageHtmlToComponent(formatText(message, {atMentions: true}))}
+                {messageHtmlToComponent(
+                    formatText(message, {atMentions: true})
+                )}
                 <Button
                     bsStyle='primary'
                     aria-haspopup='true'
