@@ -9,7 +9,6 @@ import './styles.css';
 
 export default class PostTypeSurvey extends React.PureComponent {
     static propTypes = {
-        dashboardURL: PropTypes.string.isRequired,
         post: PropTypes.object.isRequired,
         currentUser: PropTypes.object.isRequired,
         openSurveyModal: PropTypes.func.isRequired,
@@ -35,7 +34,6 @@ export default class PostTypeSurvey extends React.PureComponent {
     };
 
     goToDashboard = () => {
-        // window.location.href = this.props.dashboardURL;
         this.props.openRiffDashboard(this.props.post.props.meeting_id);
     };
 

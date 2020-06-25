@@ -24,12 +24,3 @@ export const survey = (state = INITIAL_STATE, action) => {
         return state;
     }
 };
-
-export const dashboardPath = (state = '', action) => {
-    switch (action.type) {
-    case Constants.ACTION_TYPES.RECEIVED_DASHBOARD_PATH:
-        return action.data.path;
-    default:
-        return state;
-    }
-};
