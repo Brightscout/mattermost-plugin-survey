@@ -2,14 +2,13 @@ const exec = require('child_process').exec;
 
 const path = require('path');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-
 module.exports = {
     entry: [
         './src/index.jsx',
     ],
     resolve: {
         alias: {
+            assets: path.resolve(__dirname, '../assets'),
             constants: path.resolve(__dirname, 'src/constants'),
         },
         modules: [
@@ -107,12 +106,6 @@ module.exports = {
     },
     target: 'web',
     plugins: [
-        new CopyWebpackPlugin([
-            {
-                from: 'assets',
-                to: 'static/',
-            },
-        ]),
         {
             apply: (compiler) => {
                 compiler.hooks.afterEmit.tap('AfterEmitPlugin', () => {

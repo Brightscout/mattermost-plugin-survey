@@ -1,4 +1,5 @@
 ## Table of Contents
 
-- [System Console Settings](./overview)
+- [Overview](./overview)
+- [System Console Settings](./system_console_settings)
 - [DB Schema](./db_schema)

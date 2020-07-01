@@ -11,11 +11,12 @@ import {
     Tooltip,
 } from 'react-bootstrap';
 
+import loadingGif from 'assets/load.gif';
+
 import QuestionTypeOpen from '../question_type_open';
 import QuestionTypeLikertScale from '../question_type_likert_scale';
 
 import constants from '../../constants';
-import loadingGif from '../../../assets/load.gif';
 
 import './styles.css';
 

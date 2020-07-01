@@ -3,6 +3,9 @@
     "version": "1.0.6",
     "name": "Riff Survey",
     "description": "",
+    "homepage_url": "https://github.com/rifflearning/mattermost-plugin-survey",
+    "support_url": "https://github.com/rifflearning/mattermost-plugin-survey/issues",
+    "icon_path": "assets/logo.svg",
     "min_server_version": "5.12.0",
     "server": {
         "executables": {
@@ -17,12 +20,6 @@
     },
     "settings_schema": {
         "settings": [
-            {
-                "key": "BotUsername",
-                "display_name": "Bot Username:",
-                "type": "username",
-                "help_text": "Select the user that initiates the surveys posts."
-            },
             {
                 "key": "Survey",
                 "display_name": "Survey:",

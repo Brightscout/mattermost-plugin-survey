@@ -57,5 +57,6 @@ Set up CircleCI to run the build job for each branch and build-and-release for e
 
 ## Documentation
 
-- [System Console Settings](docs/overview.md)
+- [Overview](docs/overview.md)
+- [System Console Settings](docs/system_console_settings.md)
 - [DB Schema](docs/db_schema.md)

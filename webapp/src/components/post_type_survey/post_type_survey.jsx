@@ -49,7 +49,7 @@ export default class PostTypeSurvey extends React.PureComponent {
                     className='survey-action-button'
                     onClick={this.goToDashboard}
                 >
-                    {'View Dashboard'}
+                    {'View Meeting Metrics'}
                 </Button>
             </div>
         );

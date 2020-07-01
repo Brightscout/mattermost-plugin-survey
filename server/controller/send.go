@@ -14,18 +14,16 @@ var sendSurvey = &Endpoint{
 	RequiresAuth: true,
 }
 
-func executeSendSurvey(w http.ResponseWriter, r *http.Request) error {
-	userID := r.URL.Query().Get("user_id")
+func executeSendSurvey(w http.ResponseWriter, r *http.Request) {
 	meetingID := r.URL.Query().Get("meeting_id")
-
-	// TODO: verify that user is in the meeting
+	userID := r.Header.Get(config.HeaderMattermostUserID) // can only request a survey for self
 
 	config.Mattermost.LogDebug("Send survey executed.", "userID", userID, "meetingID", meetingID)
 
 	if err := platform.SendSurveyPost(userID, meetingID); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
-		return err
+		config.Mattermost.LogError("Failed to send survey to the user.", "userID", userID, "meetingID", meetingID, "Error", err.Error())
+		return
 	}
-
-	return nil
+	returnStatusOK(w)
 }

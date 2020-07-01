@@ -14,6 +14,7 @@ export default class Client {
         this.baseUrl = `${url.protocol}//${url.host}`;
         this.pluginUrl = `${this.baseUrl}/plugins/${Constants.PLUGIN_NAME}`;
         this.apiUrl = `${this.baseUrl}/api/v4`;
+        this.pluginApiUrl = `${this.pluginUrl}/api/v1`;
     }
 
     getSurvey = async (surveyID, surveyVersion, meetingID) => {
@@ -22,27 +23,15 @@ export default class Client {
             survey_version: surveyVersion,
             meeting_id: meetingID,
         };
-        const url = `${this.pluginUrl}/survey${buildQueryString(queryParams)}`;
+        const url = `${this.pluginApiUrl}/survey${buildQueryString(queryParams)}`;
         return this.doGet(url);
-    };
-
-    getDashboardURL = (teamName, path) => {
-        let url = this.baseUrl;
-        if (teamName && path) {
-            url = `${this.baseUrl}/${teamName}${path}`;
-        }
-        return url;
-    };
-
-    getDashboardPath = () => {
-        return this.doGet(`${this.pluginUrl}/dashboard`);
     };
 
     submitSurveyResponses = (surveyPostID, meetingID, surveyID, surveyVersion, responses) => {
         const queryParams = {
             survey_post_id: surveyPostID,
         };
-        const url = `${this.pluginUrl}/submit${buildQueryString(queryParams)}`;
+        const url = `${this.pluginApiUrl}/submit${buildQueryString(queryParams)}`;
         const body = {
             meeting_id: meetingID,
             survey_id: surveyID,
