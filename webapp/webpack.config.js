@@ -57,9 +57,14 @@ module.exports = {
                 exclude: /node_modules/,
                 use: [
                     {
-                        loader: 'url-loader',
+                        loader: 'file-loader',
                         options: {
-                            limit: 8192,
+
+                            // For assets, only emit the file URL
+                            // as the static file are served from the plugin server.
+                            emitFile: false,
+                            name: '[name].[ext]',
+                            publicPath: '/plugins/survey/static/',
                         },
                     },
                 ],
