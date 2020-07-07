@@ -19,6 +19,12 @@ export const closeSurveyModal = () => (dispatch) => {
     });
 };
 
+export function surveySubmitSuccess() {
+    return {
+        type: Constants.ACTION_TYPES.SURVEY_SUBMIT_SUCCESS,
+    };
+}
+
 export function getSurvey(surveyID, surveyVersion) {
     return async () => {
         let data;
@@ -45,7 +51,7 @@ export function submitSurveyResponses(
     surveyVersion,
     responses
 ) {
-    return async () => {
+    return async (dispatch) => {
         let data;
         try {
             data = await Client.submitSurveyResponses(
@@ -62,6 +68,7 @@ export function submitSurveyResponses(
             };
         }
 
+        dispatch(surveySubmitSuccess());
         return {
             data,
             error: null,
