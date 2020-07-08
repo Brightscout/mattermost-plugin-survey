@@ -19,12 +19,6 @@ export const closeSurveyModal = () => (dispatch) => {
     });
 };
 
-export function surveySubmitSuccess() {
-    return {
-        type: Constants.ACTION_TYPES.SURVEY_SUBMIT_SUCCESS,
-    };
-}
-
 export function getSurvey(surveyID, surveyVersion, meetingID) {
     return async () => {
         let data;
@@ -60,6 +54,12 @@ export function getSurveyResponses(meetingID) {
             data,
             error: null,
         };
+    };
+}
+
+export function surveySubmitSuccess() {
+    return {
+        type: Constants.ACTION_TYPES.SURVEY_SUBMIT_SUCCESS,
     };
 }
 
