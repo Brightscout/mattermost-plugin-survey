@@ -27,6 +27,11 @@ export default class Client {
         return this.doGet(url);
     };
 
+    getSurveyResponses = async (meetingID) => {
+        const url = `${this.pluginApiUrl}/meetings/${meetingID}/response`;
+        return this.doGet(url);
+    };
+
     submitSurveyResponses = (surveyPostID, meetingID, surveyID, surveyVersion, responses) => {
         const queryParams = {
             survey_post_id: surveyPostID,

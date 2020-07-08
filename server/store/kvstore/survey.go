@@ -89,11 +89,22 @@ func (s *KVStore) SaveUserMeetingMetadata(data *model.UserMeetingMetadata) error
 	return nil
 }
 
+func (s *KVStore) GetSurveyResponse(userID, meetingID, surveyID string, surveyVersion int) (*model.SurveyResponse, error) {
+	key := SurveyResponseKey(userID, meetingID, surveyID, strconv.Itoa(surveyVersion))
+	b, err := config.Mattermost.KVGet(key)
+	if err != nil {
+		return nil, err
+	}
+	r := model.DecodeSurveyResponseFromByte(b)
+	return r, nil
+}
+
 func (s *KVStore) SaveSurveyResponse(response *model.SurveyResponse) error {
 	key := SurveyResponseKey(response.UserID, response.MeetingID, response.SurveyID, strconv.Itoa(response.SurveyVersion))
 	if err := config.Mattermost.KVSet(key, response.EncodeToByte()); err != nil {
 		return err
 	}
+
 	return nil
 }
 
