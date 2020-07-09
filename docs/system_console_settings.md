@@ -1,10 +1,13 @@
 # System Console Settings
 
-The plugin specific system console settings are visible through the `/admin_console/plugins/custom/survey` page of your mattermost instance where this plugin is installed.
+When this plugin is installed, plugin specific system console settings page is visible through the `/admin_console/plugins/plugin_survey` route of your mattermost instance.
 
+Here you can configure and customise the functionality of the plugin.
 These settings are validated by the plugin. If any one of these are invalid, the plugin would fail to start.
 
 The information about which validation is failing can be seen in the mattermost server logs: `sudo journalctl -f -u mattermost`.
+
+Here is a list of settings visible in the system console:
 
 1. **Survey**:
     - This is the schema of the survey sent to the meeting participants.
