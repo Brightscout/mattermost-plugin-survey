@@ -14,6 +14,7 @@ type SurveyStore interface {
 	SaveMeetingMetadata(data *model.MeetingMetadata) error
 	GetUserMeetingMetadata(userID, meetingID string) (*model.UserMeetingMetadata, error)
 	SaveUserMeetingMetadata(data *model.UserMeetingMetadata) error
+	GetSurveyResponse(userID, meetingID, surveyID string, surveyVersion int) (*model.SurveyResponse, error)
 	SaveSurveyResponse(response *model.SurveyResponse) error
 	GetReminderMetadata(postID string) (*model.ReminderMetadata, error)
 	SaveReminderMetadata(data *model.ReminderMetadata) error

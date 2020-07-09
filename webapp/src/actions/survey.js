@@ -19,17 +19,11 @@ export const closeSurveyModal = () => (dispatch) => {
     });
 };
 
-export function surveySubmitSuccess() {
-    return {
-        type: Constants.ACTION_TYPES.SURVEY_SUBMIT_SUCCESS,
-    };
-}
-
-export function getSurvey(surveyID, surveyVersion) {
+export function getSurvey(surveyID, surveyVersion, meetingID) {
     return async () => {
         let data;
         try {
-            data = await Client.getSurvey(surveyID, surveyVersion);
+            data = await Client.getSurvey(surveyID, surveyVersion, meetingID);
         } catch (error) {
             return {
                 data: null,
@@ -41,6 +35,31 @@ export function getSurvey(surveyID, surveyVersion) {
             data,
             error: null,
         };
+    };
+}
+
+export function getSurveyResponses(meetingID) {
+    return async () => {
+        let data;
+        try {
+            data = await Client.getSurveyResponses(meetingID);
+        } catch (error) {
+            return {
+                data: null,
+                error,
+            };
+        }
+
+        return {
+            data,
+            error: null,
+        };
+    };
+}
+
+export function surveySubmitSuccess() {
+    return {
+        type: Constants.ACTION_TYPES.SURVEY_SUBMIT_SUCCESS,
     };
 }
 

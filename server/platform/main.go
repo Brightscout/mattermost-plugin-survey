@@ -74,51 +74,6 @@ func SaveLatestSurveyInfo(id string, version int) error {
 	return nil
 }
 
-// SubmitSurveyResponse saves the survey response to the DB.
-func SubmitSurveyResponse(surveyPostID string, response *model.SurveyResponse) error {
-	userMeetingMetadata := GetUserMeetingMetadata(response.UserID, response.MeetingID)
-	// create user-meeting-metadata if survey was not sent to user
-	if userMeetingMetadata == nil {
-		userMeetingMetadata = &model.UserMeetingMetadata{
-			MeetingID:    response.MeetingID,
-			UserID:       response.UserID,
-			SurveySentAt: serverModel.GetMillis(),
-		}
-	}
-
-	if userMeetingMetadata.RespondedAt != 0 {
-		config.Mattermost.LogError("User has already responded to this survey. New response not recorded.", "UserID", response.UserID, "MeetingID", response.MeetingID, "Response", string(response.EncodeToByte()))
-		return errors.New("unable to record user response: response already exists")
-	}
-
-	response = response.PreSave()
-	if err := config.Store.SaveSurveyResponse(response); err != nil {
-		config.Mattermost.LogError("Failed to save the survey response.", "Error", err.Error())
-		return err
-	}
-
-	if surveyPostID != "" {
-		surveyPost, appErr := config.Mattermost.GetPost(surveyPostID)
-		if appErr != nil {
-			config.Mattermost.LogError("Failed to get the survey post.", "Error", appErr.Error())
-			return errors.New(appErr.Error())
-		}
-
-		surveyPost.AddProp(config.PropSurveySubmitted, true)
-		if _, appErr := config.Mattermost.UpdatePost(surveyPost); appErr != nil {
-			config.Mattermost.LogError("Failed to update the survey post.", "Error", appErr.Error())
-			return errors.New(appErr.Error())
-		}
-	}
-
-	userMeetingMetadata.RespondedAt = response.CreatedAt
-	if err := SaveUserMeetingMetadata(userMeetingMetadata); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // GetSurveyInfoForMeeting is called to select the survey for a meeting
 func GetSurveyInfoForMeeting(meetingID string) (string, int, error) {
 	if meetingMetadata := GetMeetingMetadata(meetingID); meetingMetadata != nil {

@@ -27,6 +27,7 @@ export default class SurveyModal extends React.PureComponent {
         visible: PropTypes.bool.isRequired,
         close: PropTypes.func.isRequired,
         getSurvey: PropTypes.func.isRequired,
+        getSurveyResponses: PropTypes.func.isRequired,
         submitSurveyResponses: PropTypes.func.isRequired,
     };
 
@@ -72,7 +73,7 @@ export default class SurveyModal extends React.PureComponent {
     }
 
     getSurvey = async () => {
-        const {surveyOptions, getSurvey} = this.props;
+        const {surveyOptions, getSurvey, getSurveyResponses} = this.props;
         this.setState({
             loading: true,
             getSurveyError: false,
@@ -87,10 +88,18 @@ export default class SurveyModal extends React.PureComponent {
         );
         if (data) {
             const survey = data;
-            const responses = survey.questions.reduce((obj, question) => {
+            let responses = survey.questions.reduce((obj, question) => {
                 obj[question.id] = '';
                 return obj;
             }, {});
+
+            const prevSurveyResponse = await getSurveyResponses(surveyOptions.meetingID);
+            if (prevSurveyResponse.data) {
+                responses = {
+                    ...responses,
+                    ...prevSurveyResponse.data.responses,
+                };
+            }
 
             this.setState({
                 survey,
@@ -162,7 +171,8 @@ export default class SurveyModal extends React.PureComponent {
 
     renderQuestions = () => {
         const {theme} = this.props;
-        const questionsList = this.state.survey.questions;
+        const {survey, responses} = this.state;
+        const questionsList = survey.questions;
 
         return questionsList.map((question, idx) => {
             const baseProps = {
@@ -170,6 +180,7 @@ export default class SurveyModal extends React.PureComponent {
                 id: question.id,
                 key: question.id,
                 text: question.text,
+                value: responses[question.id],
                 theme,
                 handleChange: this.handleUpdateQuestionResponse,
             };

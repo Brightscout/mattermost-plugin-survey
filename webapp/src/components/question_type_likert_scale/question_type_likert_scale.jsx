@@ -13,13 +13,13 @@ export default class QuestionTypeLikertScale extends React.PureComponent {
         theme: PropTypes.object.isRequired,
         index: PropTypes.number.isRequired,
         responses: PropTypes.array.isRequired,
+        value: PropTypes.string.isRequired,
         handleChange: PropTypes.func.isRequired,
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedValue: '',
             hoveredValue: '',
             focusedValue: '',
         };
@@ -28,9 +28,6 @@ export default class QuestionTypeLikertScale extends React.PureComponent {
     handleChange = (e) => {
         const selectedValue = e.target.value;
         this.props.handleChange(this.props.id, selectedValue);
-        this.setState({
-            selectedValue,
-        });
     };
 
     handleMouseEnter = (e) => {
@@ -47,14 +44,14 @@ export default class QuestionTypeLikertScale extends React.PureComponent {
 
     render() {
         const {
-            id: questionID, index, responses, text, theme,
+            id: questionID, index, responses, text, theme, value,
         } = this.props;
-        const {hoveredValue, selectedValue} = this.state;
+        const {hoveredValue} = this.state;
         const style = getStyle(theme);
 
         const radios = responses.map((response, idx) => {
             let optionStyle;
-            if (selectedValue === response.value) {
+            if (value === response.value) {
                 optionStyle = style.selected;
             } else if (hoveredValue === response.value) {
                 optionStyle = style.hovered;
