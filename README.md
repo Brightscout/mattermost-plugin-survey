@@ -1,4 +1,4 @@
-# mattermost-plugin-survey
+# mattermost-plugin-riff-survey
 
 A mattermost plugin to send surveys for Riff Edu meetings.
 
@@ -8,10 +8,10 @@ A mattermost plugin to send surveys for Riff Edu meetings.
 
 - Make sure you have following components installed:
 
-  - Go - v1.12 - [Getting Started](https://golang.org/doc/install)
+  - Go - v1.14 - [Getting Started](https://golang.org/doc/install)
     > **Note:** If you have installed Go to a custom location, make sure the `$GOROOT` variable is set properly. Refer [Installing to a custom location](https://golang.org/doc/install#install).
 
-  - NodeJS - v10.11 and NPM - v6.4.1 - [Downloading and installing Node.js and npm](https://docs.npmjs.com/getting-started/installing-node).
+  - NodeJS - v12.18 and NPM - [Downloading and installing Node.js and npm](https://docs.npmjs.com/getting-started/installing-node).
 
   - Make
 
@@ -22,31 +22,12 @@ A mattermost plugin to send surveys for Riff Edu meetings.
 ```bash
 $ mkdir -p ${GOPATH}/src/github.com/rifflearning
 $ cd ${GOPATH}/src/github.com/rifflearning
-$ git clone git@github.com:rifflearning/mattermost-plugin-survey.git
-$ cd mattermost-plugin-survey
+$ git clone git@github.com:rifflearning/mattermost-plugin-riff-survey.git
+$ cd mattermost-plugin-riff-survey
 $ make dist
 ```
 
-- This will produce three tar.gz files in `/dist` directory corresponding to various platforms:
-
-| Flavor  | Distribution |
-|-------- | ------------ |
-| Linux   | `mattermost-plugin-survey-v<X.Y.Z>-linux-amd64.tar.gz`   |
-| MacOS   | `mattermost-plugin-survey-v<X.Y.Z>-darwin-amd64.tar.gz`  |
-| Windows | `mattermost-plugin-survey-v<X.Y.Z>-windows-amd64.tar.gz` |
-
-This will also install, **Glide** - the Go package manager.
-
-## Setting up CircleCI
-
-Set up CircleCI to run the build job for each branch and build-and-release for each tag.
-
-1. Go to [CircleCI Dashboard](https://circleci.com/dashboard).
-2. In the top left, you will find the Org switcher. Select your Organisation.
-3. If this is your first project on CircleCI, go to the Projects page, click the **Add Projects** button, then click the **Set Up Project** button next to your project. You may also click **Start Building** to manually trigger your first build.
-4. To manage GitHub releases using CircleCI, you need to add your github personal access token to your project's environment variables.
-   - Follow the instructions [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line) to create a personal access token. For CircleCI releases, you would need the `repo` scope.
-   - Add the environment variable to your project as `GITHUB_TOKEN` by following the instructions [here](https://circleci.com/docs/2.0/env-vars/#setting-an-environment-variable-in-a-project).
+- This will produce a `.tar.gz` file in `/dist` directory that can be uploaded to mattermost.
 
 ## Installation
 
@@ -56,6 +37,8 @@ Set up CircleCI to run the build job for each branch and build-and-release for e
 4. You can configure the Plugin from **System Console > Plugins > Survey**.
 
 ## Documentation
+
+Check the `docs` directory for the documentation.
 
 - [Overview](docs/overview.md)
 - [System Console Settings](docs/system_console_settings.md)
