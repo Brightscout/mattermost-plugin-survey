@@ -3,5 +3,5 @@
 package config
 
 const (
-	PluginName = "survey"
+	PluginName = "ai.riffanalytics.survey"
 )
