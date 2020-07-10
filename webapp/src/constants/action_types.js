@@ -5,7 +5,6 @@ export const ACTION_TYPES = {
     CLOSE_SURVEY_MODAL: `${PLUGIN_NAME}_close_survey_modal`,
     SURVEY_SUBMIT_SUCCESS: `${PLUGIN_NAME}_survey_submit_success`,
 
-    // From mattermost-plugin-riff-video-chat.
-    // TODO: Update the value when if the name of the other plugin changes
-    OPEN_RIFF_DASHBOARD: 'com.rifflearning.video-chat_OPEN_RIFF_METRICS_MODAL',
+    // From mattermost-plugin-riff-core.
+    OPEN_RIFF_DASHBOARD: 'ai.riffanalytics.core_OPEN_RIFF_METRICS_MODAL',
 };
