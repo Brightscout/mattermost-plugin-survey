@@ -64,7 +64,7 @@ module.exports = {
                             // as the static file are served from the plugin server.
                             emitFile: false,
                             name: '[name].[ext]',
-                            publicPath: '/plugins/survey/static/',
+                            publicPath: '/plugins/ai.riffanalytics.survey/static/',
                         },
                     },
                 ],

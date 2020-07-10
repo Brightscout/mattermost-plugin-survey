@@ -30,12 +30,12 @@ value: {
 - For v1 plugin implementation:
   - Creation of only a single survey would be supported.
   - This survey would have a predetermined value of the “id” field: `f298903f8a80054ba09e342d0d9780635d3675a2` and the value of the “version’ field would start with 1.
-  - Each update to the survey title, description and/or questions would increment the version by 1.
-  - For each question, the id would be a random alphanumeric uuid.
+  - Each time the plugin is started after updating the survey title, description and/or questions, the survey version would be incremented by 1.
+  - The ID specific to each question would be a random alphanumeric uuid.
 
 ## Survey Response
 
-Stores the user's response for the survey. A unique entry would be created for each unique response submitted by the user.
+Stores the user's response for the survey. A unique entry would be created for each unique survey response by the user for a meeting.
 
 ```
 key: hash[survey_response_<user_id>_<meeting_id>_<survey_id>_<survey_version>]
@@ -55,10 +55,12 @@ value: {
 
 ### Additional Notes
 
+- As of the current implementation, the user may submit a response through an API call even if they were not actually the part of the meeting.
+- The user may submit the response as many times he wants. Each time, the same response entry in the DB is updated.
 - The `created_at` field stores the time when the user submitted their response.
 - The responses would be a map of questions ids from the survey to the users responses.
   - Open question response would be stored as string with the content user added to the textarea. It may be an empty string.
-  - Likert question response would be a number string from "1" (Strongly Agree) - "5" (Strongly Disagree) or an empty string if the user did not add their response.
+  - Likert question response would be a number string from "1" (Strongly Agree) - "5" (Strongly Disagree) or an empty string if the user did not add their response for that question.
 
 ## Latest Survey Info
 
@@ -86,6 +88,11 @@ value:  {
     survey_version: <number>
 }
 ```
+
+
+### Additional Notes
+
+- This entry makes sure that the same survey is sent to all the meeting participants of the same meeting.
 
 ## User Meeting Metadata
 
@@ -132,6 +139,7 @@ value:  {
     `pluginid | pkey | pvalue`
 
     - Where ‘pluginid’ is the ID of the plugin for this entry, ‘pkey’ is a string denoting the key and ‘pvalue’ is the value in bytes.
+    - You can check the plugin id for this plugin in the `plugin.json` file in the root of this repo.
 
 4. The data for KV Store table is stored as an array of bytes.
     - For Postgres DB, directly querying the table would result unintelligible data. A slightly modified query would be required:
