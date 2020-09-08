@@ -50,4 +50,5 @@ export default {
     OPEN_QUESTION_MAX_LENGTH,
     PLUGIN_NAME,
     QUESTION_TYPES,
+    METRICS_TYPE_MEETING_METRICS: 'meetingMetrics',
 };
