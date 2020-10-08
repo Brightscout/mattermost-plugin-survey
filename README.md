@@ -1,4 +1,6 @@
 # mattermost-plugin-riff-survey
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBrightscout%2Fmattermost-plugin-riff-survey.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2FBrightscout%2Fmattermost-plugin-riff-survey?ref=badge_shield)
+
 
 A mattermost plugin to send surveys for Riff Edu meetings.
 
@@ -43,3 +45,7 @@ Check the `docs` directory for the documentation.
 - [Overview](docs/overview.md)
 - [System Console Settings](docs/system_console_settings.md)
 - [DB Schema](docs/db_schema.md)
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2FBrightscout%2Fmattermost-plugin-riff-survey.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2FBrightscout%2Fmattermost-plugin-riff-survey?ref=badge_large)
